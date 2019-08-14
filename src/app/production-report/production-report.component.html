@@ -1,0 +1,142 @@
+
+        
+            <div class="container-fluid" *ngIf="tests">
+            	<div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Production report </h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card-block">
+                            <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th></th>
+                                    <th>Accepted Harnesses</th>
+                                    <th>Rejected Harnesses</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th>Tested Harnesses</th>
+                                    <td>{{acceptHarness}}</td>
+                                    <td>{{rejectHarness}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>Percentage</th>
+                                    <td>{{percentagAccept | number:'1.0-0'}}%</td>
+                                    <td>{{percentagReject | number:'1.0-0'}}%</td>
+                                  </tr>
+                                  <tr>
+                                    <th>Av. Cycle Time</th>
+                                    <td>{{avgAcceptHarness}}</td>
+                                    <td>{{avgRejectHarness}}</td>
+                                  </tr>
+                                </tbody>
+                            </table> 
+                            <div class="row " style="align-items: center;">
+                                <div class="col-1 text-right">
+                                    <i class="fa fa-thumbs-up" style="font-size: 26px"></i>
+                                </div>
+                                <div class="col-10 px-0">
+                                        <div class="progress" style="background-color: #ff0000;">
+                                          <div class="progress-bar" role="progressbar" [ngStyle]="{'width':(percentagAccept | number:'1.0-0')+'%'}" style="background-color: #3cba9f;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                        </div>
+                                </div>
+                                <div class="col-1 text-left">
+                                    <i class="fa fa-thumbs-down" style="font-size: 26px"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-6">
+                        <div class="row">   
+                            <div class="col-6">
+                                <div class="card-block">
+                                    <div>   
+                                        <canvas  id="Production">{{ chartProduction }}</canvas>
+                                    </div>
+                                    <div class="text-center">
+                                        <span>500</span>   
+                                    </div>
+                                    <div class="text-center">
+                                        <span>Target Production</span>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card-block">
+                                     <div>   
+                                        <canvas  id="NG">{{ chartNG }}</canvas>
+                                    </div>
+                                    <div class="text-center">
+                                        <span>100</span>   
+                                    </div>
+                                    <div class="text-center">
+                                        <span>Target NG</span>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    	
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-block" style="overflow-x: scroll;">
+                          <table datatable [dtOptions]="dtOptions" class="row-border hover px-0" *ngIf="tests">
+                              <thead style="background: #ccf6f482;">
+                                <tr>
+                                  <th>Bank</th>
+                                  <th>Ref</th>
+                                  <th>Batch</th>
+                                  <th>Part</th>
+                                  <th>Worker</th>
+                                  <th>DateBegin</th>
+                                  <th>DateEnd</th>
+                                  <th>State</th>
+                                  <th>Incident</th>
+                                  <th>Type</th>
+                                  <th>Counterpart1</th>
+                                  <th>Counterpart2</th>
+                                  <th>Object</th>
+                                  <th>Wire1</th>
+                                  <th>Wire2</th>
+                                  <th>Way</th>
+                                  <th>TimeU</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let test of tests">
+                                  <td>{{test.Bank}}</td>
+                                  <td>{{test.Ref}}</td>
+                                  <td>{{test.Batch}}</td>
+                                  <td>{{test.Part}}</td>
+                                  <td>{{test.Worker}}</td>
+                                  <td>{{test.DateBegin}}</td>
+                                  <td>{{test.DateEnd}}</td>
+                                  <td>{{test.State}}</td>
+                                  <td>{{test.Incident}}</td>
+                                  <td>{{test.Type}}</td>
+                                  <td>{{test.Counterpart1}}</td>
+                                  <td>{{test.Counterpart2}}</td>
+                                  <td>{{test.Object}}</td>
+                                  <td>{{test.Wire1}}</td>
+                                  <td>{{test.Wire2}}</td>
+                                  <td>{{test.Way}}</td>
+                                  <td>{{test.TimeU}}</td>
+                                </tr>
+                               
+                              </tbody>
+                            </table>  
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        
+    
+  
