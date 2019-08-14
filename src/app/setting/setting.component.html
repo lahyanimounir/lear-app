@@ -1,3 +1,165 @@
-<p>
-  setting works!
-</p>
+     <div class="container-fluid">
+     	<div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Settings </h3>
+                    </div>
+                </div>
+         <div class="row">
+                	<div class="col-12">
+                		<div class="tabs" >
+  <div class="tab-button-outer">
+    <ul id="tab-button" style="cursor: pointer;">
+      <li><a [ngStyle]="{'background-color':tabs === 'taktTime' ? '#fff' : '' }" (click)="tabs = 'taktTime'">Takt Time</a></li>
+      <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'correctionCable' ? '#fff' : '' }" (click)="tabs = 'correctionCable'"> Correction des câbles rejetés</a></li>
+      <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'targetProduction' ? '#fff' : '' }" (click)="tabs = 'targetProduction'">Target production</a></li>
+      <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'targetNg' ? '#fff' : '' }" (click)="tabs = 'targetNg'"> Target Quality (NG)</a></li>
+    </ul>
+  </div>
+ 
+
+  <div *ngIf=" tabs == 'taktTime'" style="border: 1px solid #ddd;padding: 20px">
+    <h2>Takt Time </h2>
+    <div class="row">
+	    <div class="col-6">
+		    <div><span>Takt Time</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Occurrence : chaque ligne</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Récurrence : Aléatoirement</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+	    </div>
+	    <div class="col-6 text-center" style="padding-top: 23px">
+	    	<button class="btn btn-success">Enregistrer</button>
+	    </div>
+    </div>
+  </div>
+  <div *ngIf=" tabs == 'correctionCable'" style="border: 1px solid #ddd;padding: 20px">
+    <h2> Correction des câbles rejetés</h2>
+     <div class="row">
+	    <div class="col-6">
+		    <div><span>IPPM Rectification</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Occurrence : chaque ligne</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Récurrence :  Chaque heure</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+	    </div>
+	    <div class="col-6 text-center" style="padding-top: 23px">
+	    	<button class="btn btn-success">Enregistrer</button>
+	    </div>
+    </div>
+  </div>
+  <div *ngIf=" tabs == 'targetProduction'" style="border: 1px solid #ddd;padding: 20px">
+    <h2>Target production</h2>
+    <div class="row">
+	    <div class="col-6">
+		    <div><span>Production Target</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Occurrence : chaque ligne</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Récurrence : Aléatoirement</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+	    </div>
+	    <div class="col-6 text-center" style="padding-top: 23px">
+	    	<button class="btn btn-success">Enregistrer</button>
+	    </div>
+    </div>
+  </div>
+  <div *ngIf=" tabs == 'targetNg'" style="border: 1px solid #ddd;padding: 20px">
+    <h2>Tab 4</h2>
+      <div class="row">
+	    <div class="col-6">
+		    <div><span>Production Target</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Occurrence : chaque ligne</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+		</div>
+		<div class="col-6">
+		    <div><span>Récurrence : Un global pour toute les lignes</span></div>
+		    <div>
+		    	<input type="text" style="width: 100%" class="form-control" name="">
+		    </div>
+	    </div>
+	    <div class="col-6 text-center" style="padding-top: 23px">
+	    	<button class="btn btn-success">Enregistrer</button>
+	    </div>
+    </div>
+  </div>
+
+</div>
+                	</div>
+                	<div class="col-12">
+                        <div class="card-block" style="overflow-x: auto;">
+                        	<div style=" padding: 20px;border:1px solid #ddd;">
+                          <table datatable [dtOptions]="dtOptions" class="table row-border hover px-0" >
+                              <thead style="background: #ccf6f482;">
+                                <tr>
+                                  <th>Plant</th>
+                                  <th>Project</th>
+                                  <th>Family</th>
+                                  <th>Line</th>
+                                  <th>Action</th>
+                                 
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr >
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>3</td>
+                                  <td>4</td>
+                                  <td>
+                                  	<button class="btn btn-success" style="margin-right: 15px">
+                                  		Modifier
+                                  	</button>
+                                  	<button class="btn btn-danger">
+                                  		Supprimer
+                                  	</button>
+                                  </td>
+                                
+                                </tr>
+                               
+                               
+                              </tbody>
+                            </table>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+</div>
