@@ -68,7 +68,7 @@
                     <div class="col-12">
                         <div  style="overflow-x: auto;">
                         	<div style=" border:1px solid #ddd;">
-                          <table datatable [dtOptions]="dtOptions" class="row-border hover px-0" >
+                          <table datatable [dtOptions]="dtOptions" class="row-border hover px-0" *ngIf="nbrErrorsByType">
                               <thead style="background: #ccf6f482;">
                                 <tr>
                                   <th>Item</th>
@@ -79,28 +79,12 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr >
-                                  <td>1</td>
-                                  <td>2</td>
-                                  <td>3</td>
-                                  <td>4</td>
-                                
+                                <tr *ngFor="let tab of nbrErrorsByType.type let i = index">
+                                  <td>{{tab}}</td>
+                                  <td>{{nbrErrorsByType.total[i]}}</td>
+                                  <td>{{nbrErrorsByType.percentage[i]}}</td>
+                                  <td>{{nbrErrorsByType.cum[i]}}</td>
                                 </tr>
-                                <tr >
-                                  <td>1</td>
-                                  <td>2</td>
-                                  <td>3</td>
-                                  <td>4</td>
-                                
-                                </tr>
-                                <tr >
-                                  <td>1</td>
-                                  <td>2</td>
-                                  <td>3</td>
-                                  <td>4</td>
-                                
-                                </tr>
-                               
                               </tbody>
                             </table>  
                             </div>
