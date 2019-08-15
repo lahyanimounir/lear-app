@@ -236,7 +236,7 @@ export class ErrorsAnalysisComponent implements OnInit {
 
   getData() {
     this.httpClient
-      .get<any[]>('http://localhost/industriel/api/errorsAnalysis/read.php')
+      .get<any[]>('http://api.sunrise-pro.com/errorsAnalysis/read.php')
       .subscribe(
         (response :any) => {
 
