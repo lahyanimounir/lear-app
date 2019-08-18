@@ -14,6 +14,7 @@ import { SettingComponent } from './setting/setting.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 const appRoutes: Routes = [
   { path: 'dashbors', component: DashbordsComponent },
   { path: 'ProductionReport', component: ProductionReportComponent },
@@ -21,8 +22,9 @@ const appRoutes: Routes = [
   { path: 'ErrorsAnalysis', component: ErrorsAnalysisComponent },
   { path: 'RemoteControl', component: RemoteControlComponent },
   { path: 'Setting', component: SettingComponent },
+  { path: 'Login', component: LoginComponent },
   { path: '',
-    redirectTo: '/dashbors',
+    redirectTo: '/Login',
     pathMatch: 'full'
   }
 ];
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     RemoteControlComponent,
     NavBarComponent,
     HeaderComponent,
-    SettingComponent
+    SettingComponent,
+    LoginComponent
   ],
   imports: [
   RouterModule.forRoot(
