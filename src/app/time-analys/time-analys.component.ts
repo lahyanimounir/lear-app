@@ -17,7 +17,7 @@ solvingTimeByWire = {wires : [],count : [],percent : []};
 solvingTimeByCPV = {connectors : [],count : [],percent : []};
   constructor(private httpClient: HttpClient) { }
 
-  ///.get<any[]>('http://localhost/industriel/api/error/read.php')
+  //.get<any[]>('http://localhost/industriel/api/error/read.php')
 getData() {
     this.httpClient
       .get<any[]>('http://api.sunrise-pro.com/error/read.php')

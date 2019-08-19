@@ -20,6 +20,7 @@ export class ErrorsAnalysisComponent implements OnInit {
   totalErrorsType12 = [];
   totalErrorsType19 = [];
   nbrErrorsByType = {type: [],total: [],percentage : [],cum : []};
+  moyErrorsByCable = {moy: [],calc: [],date : []};
   constructor(private httpClient: HttpClient) { }
 
   	getNbrErrorsByType(data){
@@ -234,6 +235,75 @@ export class ErrorsAnalysisComponent implements OnInit {
 	}
 
 
+	getMoyErrorsByCable(totalCable,totalErrors,moyCable){
+		for(let i=0;i<totalCable.length;i++){
+			this.moyErrorsByCable.date.push(totalCable[i].date);
+			this.moyErrorsByCable.moy.push(moyCable[i].moy);
+			let existe = 0;
+			let index = 0;
+			for(let j = 0;j<totalErrors.length;j++){
+				if(totalErrors[j].date == totalCable[i].date){
+					existe = 1;
+					index = j;
+				}
+			}
+			if(existe != 0){
+				let calc : any= Number(totalErrors[index].total)/Number(totalCable[i].total);
+				calc = calc.toFixed(2);
+				this.moyErrorsByCable.calc.push(calc);
+			}else{
+				this.moyErrorsByCable.calc.push(0);
+			}
+		}
+		var chartMoyCableErrors = new Chart('testedHarness', {
+    type: 'line',
+    data: {
+    	labels: this.moyErrorsByCable.date,
+			datasets: [{
+				label: 'Error',
+				backgroundColor: '#009efb',
+				borderColor: '#009efb',
+				fill: false,
+				data: this.moyErrorsByCable.calc,
+				yAxisID: 'B'
+			},
+			{
+				type:"line",
+				label: 'Tested Harness',
+				backgroundColor: '#ff0000',
+				borderColor: '#ff0000',
+				fill: false,
+				data: this.moyErrorsByCable.moy,
+				yAxisID: 'A'
+			}
+			]
+    },
+    options: {
+					responsive: true,
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: false,
+								labelString: 'Error / tested harness'
+							}
+						}],
+						yAxes: [
+						{
+        id: 'A',
+        type: 'linear',
+        position: 'right',
+      }, {
+        id: 'B',
+        type: 'linear',
+        position: 'left'
+      }]
+					}
+				}
+});
+	}
+
+//.get<any[]>('http://localhost/industriel/api/errorsAnalysis/read.php')
   getData() {
     this.httpClient
       .get<any[]>('http://api.sunrise-pro.com/errorsAnalysis/read.php')
@@ -242,7 +312,7 @@ export class ErrorsAnalysisComponent implements OnInit {
 
         	this.getTotalErrorsByTime(response.totalErrorsByTime);
           	this.getNbrErrorsByType(response.nbrErrorsByType);
-
+          	this.getMoyErrorsByCable(response.totalCableByDate,response.totalErrorsByDate,response.moyTimeTestByDate);
 
         },
         (error) => {
@@ -257,46 +327,46 @@ export class ErrorsAnalysisComponent implements OnInit {
   	          
 
 
-  	          	          var stackedBar = new Chart('testedHarness', {
-    type: 'line',
-    data: {
-    	labels: ["44",
-					"0",
-					"6",
-					"22",
-					"10",
-					"13",
-					"40"],
-			datasets: [{
-				label: 'line 1',
-				backgroundColor: '#009efb',
-				borderColor: '#009efb',
-				fill: false,
-				data: [
-					44,
-					0,
-					6,
-					22,
-					10,
-					13,
-					40
-				],
-			},{
-				label: 'line 3',
-				backgroundColor: '#ff0000',
-				borderColor: '#ff0000',
-				fill: false,
-				data: [50,
-					30,
-					16,
-					2,
-					12,
-					15,
-					10],
-			},
+//   	          	          var stackedBar = new Chart('testedHarness', {
+//     type: 'line',
+//     data: {
+//     	labels: ["44",
+// 					"0",
+// 					"6",
+// 					"22",
+// 					"10",
+// 					"13",
+// 					"40"],
+// 			datasets: [{
+// 				label: 'line 1',
+// 				backgroundColor: '#009efb',
+// 				borderColor: '#009efb',
+// 				fill: false,
+// 				data: [
+// 					44,
+// 					0,
+// 					6,
+// 					22,
+// 					10,
+// 					13,
+// 					40
+// 				],
+// 			},{
+// 				label: 'line 3',
+// 				backgroundColor: '#ff0000',
+// 				borderColor: '#ff0000',
+// 				fill: false,
+// 				data: [50,
+// 					30,
+// 					16,
+// 					2,
+// 					12,
+// 					15,
+// 					10],
+// 			},
 			
-    ]}
-});
+//     ]}
+// });
 
 
   	          	                    
