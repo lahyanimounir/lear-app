@@ -21,8 +21,22 @@ export class ErrorsAnalysisComponent implements OnInit {
   totalErrorsType19 = [];
   nbrErrorsByType = {type: [],total: [],percentage : [],cum : []};
   moyErrorsByCable = {moy: [],calc: [],date : []};
+  recordsFilter;
   constructor(private httpClient: HttpClient) { }
-
+       getDataFilter() {
+    this.httpClient
+      .get<any[]>('http://api.sunrise-pro.com/project/read.php')
+      .subscribe(
+        (response :any) => {
+         
+          this.recordsFilter=response.records;
+          console.log(this.recordsFilter)
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
   	getNbrErrorsByType(data){
   		const sum = data
   					.map(item => item.total)
@@ -322,6 +336,7 @@ export class ErrorsAnalysisComponent implements OnInit {
 }
 
   ngOnInit() {
+  	this.getDataFilter();
   	this.getData();
   	
   	          
