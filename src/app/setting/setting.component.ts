@@ -18,7 +18,7 @@ records ;
   }
     getData() {
     this.httpClient
-      .get<any[]>('http://localhost/api/project/read.php')
+      .get<any[]>('http://api.sunrise-pro.com/project/read.php')
       .subscribe(
         (response :any) => {
          
@@ -33,14 +33,14 @@ records ;
   saveData(){
   	console.log(this.product)
   	this.httpClient
-      .post('http://localhost/api/project/project.php',this.product)
+      .post('http://api.sunrise-pro.com/project/project.php',this.product)
       .subscribe()
 
       	}
   updateData(){
     console.log(this.product)
     this.httpClient
-      .post('http://localhost/api/project/update.php',this.product)
+      .post('http://api.sunrise-pro.com/api/project/update.php',this.product)
       .subscribe((response :any) => {
          
          this.getData();
@@ -52,7 +52,7 @@ records ;
   }
   deletteData(records){
     this.httpClient
-      .post('http://localhost/api/project/delette.php',records)
+      .post('http://api.sunrise-pro.com/api/project/delette.php',records)
       .subscribe((response :any) => {
          
          this.getData();
