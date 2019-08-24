@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dashbords',
   templateUrl: './dashbords.component.html',
   styleUrls: ['./dashbords.component.css']
 })
 export class DashbordsComponent implements OnInit {
-
-  constructor() { }
+recordsFilter;
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
+  	this.getDataFilter();
 
   	  	          	          var stackedBar = new Chart('ippm', {
     type: 'line',
@@ -41,5 +42,18 @@ export class DashbordsComponent implements OnInit {
     ]}
 });
   }
-
+   getDataFilter() {
+    this.httpClient
+      .get<any[]>('http://api.sunrise-pro.com/project/read.php')
+      .subscribe(
+        (response :any) => {
+         
+          this.recordsFilter=response.records;
+          console.log(this.recordsFilter)
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
 }

@@ -32,6 +32,7 @@ avgAcceptHarness;
 avgRejectHarness;
 percentagAccept;
 percentagReject;
+recordsFilter;
  
   constructor(private httpClient: HttpClient) { }
  /*    options: {
@@ -52,6 +53,7 @@ percentagReject;
   ngOnInit() {
 
   	this.getData();
+    this.getDataFilter();
   	this.chartProduction = new Chart('Production', {
           type: 'doughnut',
           data: {
@@ -103,10 +105,24 @@ percentagReject;
     return time[0]+' min '+ sec[0]+' s';
   }
 
+   getDataFilter() {
+    this.httpClient
+      .get<any[]>('http://api.sunrise-pro.com/project/read.php')
+      .subscribe(
+        (response :any) => {
+         
+          this.recordsFilter=response.records;
+          console.log(this.recordsFilter)
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
 //.get<any[]>('http://api.sunrise-pro.com/test/read.php')
     getData() {
     this.httpClient
-      .get<any[]>('http://localhost/api/project/read.php')
+      .get<any[]>('http://api.sunrise-pro.com/test/read.php')
       .subscribe(
         (response :any) => {
         	console.log(response)
