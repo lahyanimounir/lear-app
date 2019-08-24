@@ -33,6 +33,11 @@ avgRejectHarness;
 percentagAccept;
 percentagReject;
 recordsFilter;
+
+family ='';
+plant = '';
+project = '';
+line = '';
  
   constructor(private httpClient: HttpClient) { }
  /*    options: {
@@ -122,7 +127,7 @@ recordsFilter;
 //.get<any[]>('http://api.sunrise-pro.com/test/read.php')
     getData() {
     this.httpClient
-      .get<any[]>('http://api.sunrise-pro.com/test/read.php')
+      .get<any[]>('http://api.sunrise-pro.com/test/read.php?s='+this.line)
       .subscribe(
         (response :any) => {
         	console.log(response)
@@ -142,5 +147,69 @@ recordsFilter;
         }
       );
 }
+
+
+search() {
+    this.httpClient
+      .get<any[]>('http://api.sunrise-pro.com/test/read.php?s='+this.line)
+      .subscribe(
+        (response :any) => {
+          console.log(response)
+          this.dtOptions = { pagingType: 'full_numbers', pageLength: 5, processing: true };
+          this.tests = response.records;
+          this.acceptHarness = response.nbrAccept[0];
+          this.rejectHarness = response.nbrReject[0];
+          let total = Number(this.acceptHarness) + Number(this.rejectHarness);
+          this.percentagAccept = Number(this.acceptHarness)*100 / total;
+          this.percentagReject = Number(this.rejectHarness)*100 / total;
+          this.avgAcceptHarness = this.calcTime(response.avgAccept[0]);
+          this.avgRejectHarness = this.calcTime(response.avgReject[0]);
+
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
+
+objectKey(obj) {
+    return Object.keys(obj);
+  }
+
+  formatedCerts(data,elem) {
+
+    if(elem == 'plant'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.plant]) {
+          prev[now.plant] = [];
+        }
+
+        prev[now.plant].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'project'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.project]) {
+          prev[now.project] = [];
+        }
+
+        prev[now.project].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'famille'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.famille]) {
+          prev[now.famille] = [];
+        }
+
+        prev[now.famille].push(now);
+        return prev;
+      }, {});
+    }
+    /*
+       Now your data : { "1050 AJ": [ .... ], "X332.0 AC": [...], ... }
+    */
+
+  }
 
 }

@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { FilterDataPipe } from './filter-data.pipe';
 
 const appRoutes: Routes = [
   { path: 'dashbors', component: DashbordsComponent },
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     NavBarComponent,
     HeaderComponent,
     SettingComponent,
-    LoginComponent
+    LoginComponent,
+    FilterDataPipe
   ],
   imports: [
   FormsModule,

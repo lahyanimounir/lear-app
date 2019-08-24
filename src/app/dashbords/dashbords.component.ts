@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DashbordsComponent implements OnInit {
 recordsFilter;
+family ='';
+plant = '';
+project = '';
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
