@@ -12,9 +12,7 @@
 			<div>Plant</div>
 			<div>
 				<select class="form-control">
-					<option>plant 1</option>
-					<option>plant 2</option>
-					<option>plant 3</option>
+					<option *ngFor="let rec of recordsFilter">{{rec.plant}}</option>
 				</select>
 			</div>
 		</div>
@@ -23,9 +21,7 @@
 			<div>Projet</div>
 			<div>
 				<select class="form-control">
-					<option>projet 1</option>
-					<option>projet 2</option>
-					<option>projet 3</option>
+					<option *ngFor="let rec of recordsFilter">{{rec.project}}</option>
 				</select>
 			</div>
 		</div>
@@ -33,9 +29,7 @@
 			<div>Famille</div>
 			<div>
 				<select class="form-control">
-					<option>famille 1</option>
-					<option>famille 2</option>
-					<option>famille 3</option>
+					 <option *ngFor="let rec of recordsFilter">{{rec.famille}}</option>
 				</select>
 			</div>
 		</div>
@@ -43,9 +37,7 @@
 			<div>Line</div>
 			<div>
 				<select class="form-control">
-					<option>line 1</option>
-					<option>line 2</option>
-					<option>line 3</option>
+					  <option *ngFor="let rec of recordsFilter">{{rec.linee}}</option>
 				</select>
 			</div>
 		</div>
