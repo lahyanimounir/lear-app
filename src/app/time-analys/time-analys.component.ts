@@ -15,9 +15,25 @@ errorSolvingTime = {total : [],TimeU : []};
 solvingTimeByCounterpart = {counterparts : [],count : [],percent : []};
 solvingTimeByWire = {wires : [],count : [],percent : []};
 solvingTimeByCPV = {connectors : [],count : [],percent : []};
+recordsFilter;
   constructor(private httpClient: HttpClient) { }
 
   //.get<any[]>('http://localhost/industriel/api/error/read.php')
+
+     getDataFilter() {
+    this.httpClient
+      .get<any[]>('http://api.sunrise-pro.com/project/read.php')
+      .subscribe(
+        (response :any) => {
+         
+          this.recordsFilter=response.records;
+          console.log(this.recordsFilter)
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
 getData() {
     this.httpClient
       .get<any[]>('http://api.sunrise-pro.com/error/read.php')
@@ -348,7 +364,7 @@ getData() {
 
 
   ngOnInit() {
-
+  	this.getDataFilter();
   	this.getData();
 
   
