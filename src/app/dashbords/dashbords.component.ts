@@ -56,4 +56,44 @@ recordsFilter;
         }
       );
 }
+
+objectKey(obj) {
+    return Object.keys(obj);
+  }
+
+  formatedCerts(data,elem) {
+
+  	if(elem == 'plant'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.plant]) {
+          prev[now.plant] = [];
+        }
+
+        prev[now.plant].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'project'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.project]) {
+          prev[now.project] = [];
+        }
+
+        prev[now.project].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'famille'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.famille]) {
+          prev[now.famille] = [];
+        }
+
+        prev[now.famille].push(now);
+        return prev;
+      }, {});
+    }
+    /*
+       Now your data : { "1050 AJ": [ .... ], "X332.0 AC": [...], ... }
+    */
+
+  }
 }

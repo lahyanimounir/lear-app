@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class SettingComponent implements OnInit {
 tabs ="taktTime";
 dtOptions;
-product ={'id':'','plant':'','project':'','famille':'','line':''};
+product ={'id':'','plant':'','project':'','famille':'','line':'','bank':''};
 updateModal=false
 records ;
   constructor(private httpClient: HttpClient) { }
@@ -32,6 +32,8 @@ records ;
 }
   saveData(){
   	console.log(this.product)
+
+    this.product.bank=this.product.plant+'-'+this.product.project+'-'+this.product.famille+'-'+this.product.line;
   	this.httpClient
       .post('http://api.sunrise-pro.com/project/project.php',this.product)
       .subscribe()
@@ -40,7 +42,7 @@ records ;
   updateData(){
     console.log(this.product)
     this.httpClient
-      .post('http://api.sunrise-pro.com/api/project/update.php',this.product)
+      .post('http://api.sunrise-pro.com/project/update.php',this.product)
       .subscribe((response :any) => {
          
          this.getData();
@@ -52,7 +54,7 @@ records ;
   }
   deletteData(records){
     this.httpClient
-      .post('http://api.sunrise-pro.com/api/project/delette.php',records)
+      .post('http://api.sunrise-pro.com/project/delette.php',records)
       .subscribe((response :any) => {
          
          this.getData();

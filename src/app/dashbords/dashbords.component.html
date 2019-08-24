@@ -11,8 +11,8 @@
 		<div class="col-3">
 			<div>Plant</div>
 			<div>
-				<select class="form-control">
-					<option *ngFor="let rec of recordsFilter">{{rec.plant}}</option>
+				<select class="form-control" *ngIf="recordsFilter">
+						<option *ngFor="let key of objectKey(formatedCerts(recordsFilter,'plant'))">{{key}}</option>
 				</select>
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 			<div>Projet</div>
 			<div>
 				<select class="form-control">
-					<option *ngFor="let rec of recordsFilter">{{rec.project}}</option>
+					<option *ngFor="let key of objectKey(formatedCerts(recordsFilter,'project'))">{{key}}</option>
 				</select>
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 			<div>Famille</div>
 			<div>
 				<select class="form-control">
-					 <option *ngFor="let rec of recordsFilter">{{rec.famille}}</option>
+					<option *ngFor="let key of objectKey(formatedCerts(recordsFilter,'famille'))">{{key}}</option>
 				</select>
 			</div>
 		</div>
