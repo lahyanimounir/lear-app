@@ -16,8 +16,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 
-import { FormsModule } from '@angular/forms';
-
 const appRoutes: Routes = [
   { path: 'dashbors', component: DashbordsComponent },
   { path: 'ProductionReport', component: ProductionReportComponent },
@@ -53,8 +51,7 @@ const appRoutes: Routes = [
     ),
   HttpClientModule,
   DataTablesModule,
-    BrowserModule,
-  FormsModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
