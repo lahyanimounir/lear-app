@@ -11,7 +11,7 @@ import { RemoteControlComponent } from './remote-control/remote-control.componen
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HeaderComponent } from './header/header.component';
 import { SettingComponent } from './setting/setting.component';
-
+import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -30,6 +30,7 @@ const appRoutes: Routes = [
 ];
 @NgModule({
   declarations: [
+
     AppComponent,
     DashbordsComponent,
     ProductionReportComponent,
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     LoginComponent
   ],
   imports: [
+  FormsModule,
   RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only

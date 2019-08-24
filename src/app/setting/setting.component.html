@@ -130,7 +130,10 @@
                 	<div class="col-12">
                         <div class="card-block" style="overflow-x: auto;">
                         	<div style=" padding: 20px;border:1px solid #ddd;">
-                          <table datatable [dtOptions]="dtOptions" class="table row-border hover px-0" >
+                        		<div>
+                        			<button (click)="updateModal = false" data-toggle="modal" data-target="#exampleModal" class="btn btn-success" >Ajouter</button>
+                        		</div>
+                          <table *ngIf="records" datatable [dtOptions]="dtOptions" class="table row-border hover px-0" >
                               <thead style="background: #ccf6f482;">
                                 <tr>
                                   <th>Plant</th>
@@ -142,16 +145,16 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr >
-                                  <td>1</td>
-                                  <td>2</td>
-                                  <td>3</td>
-                                  <td>4</td>
+                                <tr *ngFor="let record of records" >
+                                  <td>{{record.plant}}</td>
+                                  <td>{{record.project}}</td>
+                                  <td>{{record.famille}}</td>
+                                  <td>{{record.linee}}</td>
                                   <td>
-                                  	<button class="btn btn-success" style="margin-right: 15px">
+                                  	<button data-toggle="modal" data-target="#exampleModal" (click)="updateProjet(record)" class="btn btn-success" style="margin-right: 15px">
                                   		Modifier
                                   	</button>
-                                  	<button class="btn btn-danger">
+                                  	<button (click)="deletteData(record)" class="btn btn-danger">
                                   		Supprimer
                                   	</button>
                                   </td>
@@ -166,4 +169,53 @@
                     </div>
                 </div>
 </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Project / Line</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-12">
+      			<div>Plant</div>
+      			<div>
+      				<input [(ngModel)]="product.plant" type="text" name="" class="form-control">
+      			</div>
+      		</div>
+      		<div class="col-12">
+      			<div>Project</div>
+      			<div>
+      				<input [(ngModel)]="product.project" type="text" name="" class="form-control">
+      			</div>
+      		</div>
+      		<div class="col-12">
+      			<div>Famille</div>
+      			<div>
+      				<input [(ngModel)]="product.famille" type="text" name="" class="form-control">
+      			</div>
+      		</div>
+      		<div class="col-12">
+      			<div>Line</div>
+      			<div>
+      				<input [(ngModel)]="product.line" type="text" name="" class="form-control">
+      			</div>
+      		</div>
+      	</div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" *ngIf="updateModal" class="btn btn-primary" data-dismiss="modal" (click)="updateData()">Update </button>
+        <button type="button" *ngIf="!updateModal" class="btn btn-primary" data-dismiss="modal" (click)="saveData()">Save </button>
+      </div>
+    </div>
+  </div>
 </div>

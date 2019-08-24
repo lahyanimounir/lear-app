@@ -106,7 +106,7 @@ percentagReject;
 //.get<any[]>('http://api.sunrise-pro.com/test/read.php')
     getData() {
     this.httpClient
-      .get<any[]>('http://api.sunrise-pro.com/test/read.php')
+      .get<any[]>('http://localhost/api/project/read.php')
       .subscribe(
         (response :any) => {
         	console.log(response)
