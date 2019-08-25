@@ -12,14 +12,41 @@
                 		<div class="tabs" >
   <div class="tab-button-outer">
     <ul id="tab-button" style="cursor: pointer;">
+
       <li><a [ngStyle]="{'background-color':tabs === 'taktTime' ? '#fff' : '' }" (click)="tabs = 'taktTime'">Takt Time</a></li>
-      <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'correctionCable' ? '#fff' : '' }" (click)="tabs = 'correctionCable'"> Correction des câbles rejetés</a></li>
+      <li><a [ngStyle]="{'background-color':tabs === 'ippm' ? '#fff' : '' }" (click)="tabs = 'ippm'">Ippm</a></li>
+      <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'correctionCable' ? '#fff' : '' }" (click)="tabs = 'correctionCable'"> Correction câbles rejetés</a></li>
       <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'targetProduction' ? '#fff' : '' }" (click)="tabs = 'targetProduction'">Target production</a></li>
       <li style="cursor: pointer;"><a [ngStyle]="{'background-color':tabs === 'targetNg' ? '#fff' : '' }" (click)="tabs = 'targetNg'"> Target Quality (NG)</a></li>
     </ul>
   </div>
  
-
+  <div *ngIf=" tabs == 'ippm'" style="border: 1px solid #ddd;padding: 20px">
+    <h2>Takt Time </h2>
+    <div class="row">
+      <div class="col-6">
+        <div><span>Takt Time</span></div>
+        <div>
+          <input type="text" style="width: 100%" class="form-control" name="">
+        </div>
+    </div>
+    <div class="col-6">
+        <div><span>Occurrence : chaque ligne</span></div>
+        <div>
+          <input type="text" style="width: 100%" class="form-control" name="">
+        </div>
+    </div>
+    <div class="col-6">
+        <div><span>Récurrence : Aléatoirement</span></div>
+        <div>
+          <input type="text" style="width: 100%" class="form-control" name="">
+        </div>
+      </div>
+      <div class="col-6 text-center" style="padding-top: 23px">
+        <button class="btn btn-success">Enregistrer</button>
+      </div>
+    </div>
+  </div>
   <div *ngIf=" tabs == 'taktTime'" style="border: 1px solid #ddd;padding: 20px">
     <h2>Takt Time </h2>
     <div class="row">

@@ -150,6 +150,8 @@ line = '';
 
 
 search() {
+  console.log(this.recordsFilter)
+  console.log(this.line);
     this.httpClient
       .get<any[]>('http://api.sunrise-pro.com/test/read.php?s='+this.line)
       .subscribe(
