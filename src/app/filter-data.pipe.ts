@@ -17,7 +17,7 @@ export class FilterDataPipe implements PipeTransform {
        	
            //return areaList.domaines.filter(item => areaname.some(f => f == item));
            return areaList.filter(item => item[param] == areaname);
-           });
+           };
        }
    }
 
