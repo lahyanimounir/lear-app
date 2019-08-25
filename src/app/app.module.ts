@@ -16,17 +16,19 @@ import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FilterDataPipe } from './filter-data.pipe';
+import { AuthService } from './auth.service';
+
 
 const appRoutes: Routes = [
-  { path: 'dashbors', component: DashbordsComponent },
-  { path: 'ProductionReport', component: ProductionReportComponent },
-  { path: 'TimeAnalysis', component: TimeAnalysComponent },
-  { path: 'ErrorsAnalysis', component: ErrorsAnalysisComponent },
-  { path: 'RemoteControl', component: RemoteControlComponent },
-  { path: 'Setting', component: SettingComponent },
-  { path: 'Login', component: LoginComponent },
+  { path: 'dashbors', component: DashbordsComponent ,canActivate: [AuthService]},
+  { path: 'ProductionReport', component: ProductionReportComponent,canActivate: [AuthService] },
+  { path: 'TimeAnalysis', component: TimeAnalysComponent ,canActivate: [AuthService]},
+  { path: 'ErrorsAnalysis', component: ErrorsAnalysisComponent,canActivate: [AuthService] },
+  { path: 'RemoteControl', component: RemoteControlComponent ,canActivate: [AuthService]},
+  { path: 'Setting', component: SettingComponent ,canActivate: [AuthService]},
+  { path: 'login', component: LoginComponent },
   { path: '',
-    redirectTo: '/Login',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];
