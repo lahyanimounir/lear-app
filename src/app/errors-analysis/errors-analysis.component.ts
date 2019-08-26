@@ -22,6 +22,11 @@ export class ErrorsAnalysisComponent implements OnInit {
   nbrErrorsByType = {type: [],total: [],percentage : [],cum : []};
   moyErrorsByCable = {moy: [],calc: [],date : []};
   recordsFilter;
+
+  family ='';
+  plant = '';
+  project = '';
+  line = '';
   constructor(private httpClient: HttpClient) { }
        getDataFilter() {
     this.httpClient
@@ -37,6 +42,49 @@ export class ErrorsAnalysisComponent implements OnInit {
         }
       );
 }
+
+
+
+objectKey(obj) {
+    return Object.keys(obj);
+  }
+
+  formatedCerts(data,elem) {
+
+    if(elem == 'plant'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.plant]) {
+          prev[now.plant] = [];
+        }
+
+        prev[now.plant].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'project'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.project]) {
+          prev[now.project] = [];
+        }
+
+        prev[now.project].push(now);
+        return prev;
+      }, {});
+    }else if(elem == 'famille'){
+      return data.reduce((prev, now) => {
+        if (!prev[now.famille]) {
+          prev[now.famille] = [];
+        }
+
+        prev[now.famille].push(now);
+        return prev;
+      }, {});
+    }
+    /*
+       Now your data : { "1050 AJ": [ .... ], "X332.0 AC": [...], ... }
+    */
+
+  }
+
   	getNbrErrorsByType(data){
   		const sum = data
   					.map(item => item.total)
@@ -317,13 +365,35 @@ export class ErrorsAnalysisComponent implements OnInit {
 });
 	}
 
+
+
+// search() {
+
+
+//   console.log(this.recordsFilter)
+//   console.log(this.line);
+//     this.httpClient
+//       .get<any[]>('http://api.sunrise-pro.com/errorsAnalysis/read.php?s='+this.line)
+//       .subscribe(
+//         (response :any) => {
+//           console.log(response)
+//         	this.getTotalErrorsByTime(response.totalErrorsByTime);
+//           	this.getNbrErrorsByType(response.nbrErrorsByType);
+//           	this.getMoyErrorsByCable(response.totalCableByDate,response.totalErrorsByDate,response.moyTimeTestByDate);
+//         },
+//         (error) => {
+//           console.log('Erreur ! : ' + error);
+//         }
+//       );
+// }
+
 //.get<any[]>('http://localhost/industriel/api/errorsAnalysis/read.php')
   getData() {
     this.httpClient
       .get<any[]>('http://api.sunrise-pro.com/errorsAnalysis/read.php')
       .subscribe(
         (response :any) => {
-
+        	console.log(response)
         	this.getTotalErrorsByTime(response.totalErrorsByTime);
           	this.getNbrErrorsByType(response.nbrErrorsByType);
           	this.getMoyErrorsByCable(response.totalCableByDate,response.totalErrorsByDate,response.moyTimeTestByDate);
